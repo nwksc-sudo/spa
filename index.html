@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Portfolio สภานักเรียน</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Mitr:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B2E5E;
+    --gold: #D4A017;
+    --gold-light: #F5D76E;
+    --sky: #5B9BD5;
+    --sky-light: #E8F4FC;
+    --white: #FFFFFF;
+    --off-white: #F7F9FC;
+    --gray: #6B7280;
+    --dark: #1A1A2E;
+    --accent: #E63946;
+    --green: #2D7D46;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--off-white);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(27,46,94,0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-logo {
+    font-family: 'Mitr', sans-serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 0.2rem; flex-wrap: wrap; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); background: rgba(212,160,23,0.15); }
+
+  /* HERO / HOME */
+  #home {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #0F1F4A 50%, #1B3A6B 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(91,155,213,0.15) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(212,160,23,0.1) 0%, transparent 50%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,160,23,0.2);
+    border: 1px solid rgba(212,160,23,0.5);
+    color: var(--gold-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 1.2rem;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.8rem;
+  }
+  .hero-motto {
+    font-size: 1rem;
+    color: var(--sky);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+  }
+  .hero-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.8rem;
+    max-width: 800px;
+    width: 100%;
+  }
+  .hero-nav-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 1rem 0.8rem;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  }
+  .hero-nav-card:hover {
+    background: rgba(212,160,23,0.2);
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    color: var(--gold-light);
+  }
+  .hero-nav-card .icon { font-size: 1.6rem; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  section:nth-child(odd) { background: var(--white); }
+  section:nth-child(even) { background: var(--off-white); }
+
+  .container { max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Mitr', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .section-title .gold { color: var(--gold); }
+  .divider {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--sky));
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .about-card {
+    background: var(--sky-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid var(--sky);
+  }
+  .about-card h3 { color: var(--navy); font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .about-card p { color: var(--gray); font-size: 0.88rem; }
+
+  /* STRUCTURE */
+  .org-chart {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0;
+    margin: 2rem 0;
+  }
+  .org-level {
+    display: flex; gap: 1rem; justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .org-card {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 0.8rem 1.4rem;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 140px;
+    position: relative;
+  }
+  .org-card.president { background: linear-gradient(135deg, var(--gold), #b8860b); color: var(--dark); }
+  .org-card.vp { background: linear-gradient(135deg, var(--sky), #3a7abf); }
+  .org-card.committee { background: rgba(27,46,94,0.75); border: 1px solid rgba(91,155,213,0.4); font-size: 0.8rem; }
+  .org-connector {
+    width: 2px; height: 30px;
+    background: linear-gradient(to bottom, var(--gold), var(--sky));
+  }
+  .org-connector-h {
+    height: 2px;
+    background: var(--sky);
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  /* DEMOCRACY */
+  .demo-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .demo-item {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+    border: 1px solid #E5E7EB;
+    transition: all 0.2s;
+  }
+  .demo-item:hover { border-color: var(--sky); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(91,155,213,0.15); }
+  .demo-item .di-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .demo-item h4 { font-size: 0.85rem; font-weight: 700; color: var(--navy); }
+
+  /* INDICATORS */
+  .indicator-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background: var(--sky-light);
+    color: var(--navy);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Sarabun', sans-serif;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .tab-btn:hover:not(.active) { border-color: var(--sky); }
+  .indicator-panel { display: none; }
+  .indicator-panel.active { display: block; }
+  .indicator-content {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+  }
+  .indicator-content h3 { color: var(--navy); font-size: 1.05rem; margin-bottom: 1rem; }
+  .indicator-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .indicator-list li {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-size: 0.88rem; color: var(--gray);
+    background: var(--sky-light);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+  }
+  .indicator-list li::before { content: '✓'; color: var(--sky); font-weight: 700; flex-shrink: 0; }
+
+  /* REFLECTION */
+  .reflection-box {
+    background: linear-gradient(135deg, var(--navy) 0%, #0F1F4A 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    color: var(--white);
+    position: relative; overflow: hidden;
+  }
+  .reflection-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+    font-size: 8rem;
+    color: rgba(212,160,23,0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .reflection-quote {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.9);
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+  .reflection-aspects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .reflection-aspect {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .reflection-aspect h4 { color: var(--gold); font-size: 0.82rem; margin-bottom: 0.3rem; }
+  .reflection-aspect p { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+
+  /* ACHIEVEMENT */
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .achievement-card {
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .achievement-card:hover { transform: translateY(-4px); }
+  .achievement-card:nth-child(1) { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+  .achievement-card:nth-child(2) { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+  .achievement-card:nth-child(3) { background: linear-gradient(135deg, #D1FAE5, #A7F3D0); }
+  .achievement-card:nth-child(4) { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
+  .achievement-card:nth-child(5) { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+  .achievement-card .ac-icon { font-size: 2.5rem; margin-bottom: 0.7rem; }
+  .achievement-card h4 { font-weight: 700; font-size: 0.9rem; color: var(--dark); }
+
+  /* CONTACT */
+  #contact { background: var(--navy) !important; }
+  #contact .section-label { color: var(--gold-light); }
+  #contact .section-title { color: var(--white); }
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: var(--white);
+    transition: all 0.2s;
+  }
+  .contact-card:hover { background: rgba(212,160,23,0.15); border-color: var(--gold); }
+  .contact-card .cc-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .contact-card h4 { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.95rem; color: var(--gold); }
+  .contact-card p { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+
+  footer {
+    background: #0A1228;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🏛️ e-Portfolio สภานักเรียน</div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#structure">Structure</a>
+    <a href="#democracy">Democracy</a>
+    <a href="#indicators">Indicators</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#achievement">Achievement</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hero-badge">e-Portfolio สภานักเรียน</div>
+  <h1 class="hero-title">สภา<span>นักเรียน</span></h1>
+  <p class="hero-subtitle">โรงเรียน [ชื่อสถานศึกษา]</p>
+  <p class="hero-motto">"ประชาธิปไตยในโรงเรียน เริ่มต้นที่นักเรียนทุกคน"</p>
+  <div class="hero-nav-grid">
+    <a href="#about" class="hero-nav-card"><span class="icon">📋</span>ข้อมูลทั่วไป</a>
+    <a href="#structure" class="hero-nav-card"><span class="icon">🏗️</span>โครงสร้าง</a>
+    <a href="#democracy" class="hero-nav-card"><span class="icon">🗳️</span>ประชาธิปไตย</a>
+    <a href="#indicators" class="hero-nav-card"><span class="icon">📊</span>ตัวชี้วัด A–E</a>
+    <a href="#reflection" class="hero-nav-card"><span class="icon">💭</span>สิ่งที่เรียนรู้</a>
+    <a href="#achievement" class="hero-nav-card"><span class="icon">🏆</span>ความสำเร็จ</a>
+    <a href="#contact" class="hero-nav-card"><span class="icon">📞</span>ติดต่อ</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2 class="section-title">ข้อมูลทั่วไป<span class="gold">เกี่ยวกับโครงการ</span></h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>🎯 ความเป็นมา & ความสำคัญ</h3>
+        <p>สภานักเรียนเป็นองค์กรที่ส่งเสริมการปกครองในระบอบประชาธิปไตยภายในโรงเรียน ให้นักเรียนได้ฝึกการมีส่วนร่วมและรับผิดชอบต่อส่วนรวม</p>
+      </div>
+      <div class="about-card">
+        <h3>🎪 วัตถุประสงค์</h3>
+        <p>เพื่อพัฒนาทักษะความเป็นผู้นำ ส่งเสริมการมีส่วนร่วม และสร้างจิตสาธารณะในหมู่นักเรียน</p>
+      </div>
+      <div class="about-card">
+        <h3>🌐 แนวคิดประชาธิปไตย</h3>
+        <p>ยึดหลักการเลือกตั้งที่บริสุทธิ์ยุติธรรม ธรรมาภิบาล วินัยเชิงบวก และจิตสาธารณะ</p>
+      </div>
+      <div class="about-card">
+        <h3>🏫 เป้าหมายสถานศึกษา</h3>
+        <p>มุ่งสร้างนักเรียนที่มีความรับผิดชอบ มีจิตสาธารณะ และเป็นพลเมืองที่ดีของสังคม</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section id="structure">
+  <div class="container">
+    <div class="section-label">Student Council Structure</div>
+    <h2 class="section-title">โครงสร้าง<span class="gold">สภานักเรียน</span></h2>
+    <div class="divider"></div>
+    <div class="org-chart">
+      <div class="org-level">
+        <div class="org-card president">👑 ประธานสภานักเรียน</div>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-level">
+        <div class="org-card vp">รองประธาน คนที่ 1</div>
+        <div class="org-card vp">รองประธาน คนที่ 2</div>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-level">
+        <div class="org-card committee">🗂️ ฝ่ายวิชาการ</div>
+        <div class="org-card committee">🎨 ฝ่ายกิจกรรม</div>
+        <div class="org-card committee">📣 ฝ่ายประชาสัมพันธ์</div>
+        <div class="org-card committee">💰 ฝ่ายการเงิน</div>
+        <div class="org-card committee">🌿 ฝ่ายสิ่งแวดล้อม</div>
+      </div>
+    </div>
+    <p style="text-align:center; color:var(--gray); font-size:0.85rem; margin-top:1rem;">* ปรับโครงสร้างให้ตรงกับสถานศึกษาจริง</p>
+  </div>
+</section>
+
+<!-- DEMOCRACY -->
+<section id="democracy">
+  <div class="container">
+    <div class="section-label">Democracy Showcase</div>
+    <h2 class="section-title">การขับเคลื่อน<span class="gold">ประชาธิปไตย</span></h2>
+    <div class="divider"></div>
+    <div class="demo-items">
+      <div class="demo-item">
+        <div class="di-icon">🗳️</div>
+        <h4>การเลือกตั้ง</h4>
+      </div>
+      <div class="demo-item">
+        <div class="di-icon">🏛️</div>
+        <h4>การประชุม</h4>
+      </div>
+      <div class="demo-item">
+        <div class="di-icon">🤝</div>
+        <h4>การมีส่วนร่วม</h4>
+      </div>
+      <div class="demo-item">
+        <div class="di-icon">💬</div>
+        <h4>รับฟังความคิดเห็น</h4>
+      </div>
+      <div class="demo-item">
+        <div class="di-icon">📢</div>
+        <h4>กิจกรรมส่งเสริมประชาธิปไตย</h4>
+      </div>
+    </div>
+    <div style="margin-top:2rem; background: var(--navy); border-radius:12px; padding:1.5rem; color:var(--white);">
+      <p style="font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:0.8rem;">📅 Timeline การขับเคลื่อน</p>
+      <div style="display:flex; gap:1rem; overflow-x:auto; padding-bottom:0.5rem;">
+        <div style="min-width:130px; background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem; text-align:center; border-top:3px solid var(--gold);">
+          <div style="font-size:0.75rem; color:var(--gold);">ขั้นตอนที่ 1</div>
+          <div style="font-size:0.82rem; margin-top:0.3rem;">ประกาศรับสมัคร</div>
+        </div>
+        <div style="min-width:130px; background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem; text-align:center; border-top:3px solid var(--sky);">
+          <div style="font-size:0.75rem; color:var(--sky);">ขั้นตอนที่ 2</div>
+          <div style="font-size:0.82rem; margin-top:0.3rem;">หาเสียงอย่างสร้างสรรค์</div>
+        </div>
+        <div style="min-width:130px; background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem; text-align:center; border-top:3px solid var(--green);">
+          <div style="font-size:0.75rem; color:#6EE7A0;">ขั้นตอนที่ 3</div>
+          <div style="font-size:0.82rem; margin-top:0.3rem;">วันเลือกตั้ง</div>
+        </div>
+        <div style="min-width:130px; background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem; text-align:center; border-top:3px solid var(--accent);">
+          <div style="font-size:0.75rem; color:#FCA5A5;">ขั้นตอนที่ 4</div>
+          <div style="font-size:0.82rem; margin-top:0.3rem;">นับคะแนนโปร่งใส</div>
+        </div>
+        <div style="min-width:130px; background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem; text-align:center; border-top:3px solid var(--gold-light);">
+          <div style="font-size:0.75rem; color:var(--gold-light);">ขั้นตอนที่ 5</div>
+          <div style="font-size:0.82rem; margin-top:0.3rem;">ประกาศผล</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDICATORS A-E -->
+<section id="indicators">
+  <div class="container">
+    <div class="section-label">A–E Indicators</div>
+    <h2 class="section-title">ผลงาน<span class="gold">ตามตัวชี้วัด</span></h2>
+    <div class="divider"></div>
+    <div class="indicator-tabs">
+      <button class="tab-btn active" onclick="showTab('a')">A — Clean Election</button>
+      <button class="tab-btn" onclick="showTab('b')">B — Good Governance</button>
+      <button class="tab-btn" onclick="showTab('c')">C — Positive Discipline</button>
+      <button class="tab-btn" onclick="showTab('d')">D — Public Mind</button>
+      <button class="tab-btn" onclick="showTab('e')">E — Innovation</button>
+    </div>
+
+    <div id="panel-a" class="indicator-panel active">
+      <div class="indicator-content">
+        <h3>🗳️ Clean Election — ระบบและกระบวนการเลือกตั้งสุจริต</h3>
+        <ul class="indicator-list">
+          <li>ขั้นตอนการเลือกตั้งที่ชัดเจนและโปร่งใส</li>
+          <li>การหาเสียงอย่างสร้างสรรค์</li>
+          <li>การใช้สิทธิ์เลือกตั้งของนักเรียน</li>
+          <li>การนับคะแนนแบบโปร่งใส</li>
+          <li>ภาพกิจกรรมการเลือกตั้ง</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="panel-b" class="indicator-panel">
+      <div class="indicator-content">
+        <h3>🏛️ Good Governance — ธรรมาภิบาล</h3>
+        <ul class="indicator-list">
+          <li>การบริหารงานแบบมีส่วนร่วม</li>
+          <li>การประชุมสภานักเรียน</li>
+          <li>การรับฟังความคิดเห็นนักเรียน</li>
+          <li>ระบบตรวจสอบภายใน</li>
+          <li>การสื่อสารภายในองค์กร</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="panel-c" class="indicator-panel">
+      <div class="indicator-content">
+        <h3>⭐ Positive Discipline — สร้างวินัยเชิงบวก</h3>
+        <ul class="indicator-list">
+          <li>กิจกรรมสร้างวินัยในโรงเรียน</li>
+          <li>โครงการ Student Coach</li>
+          <li>ระบบ Buddy System</li>
+          <li>การสร้างแรงจูงใจเชิงบวก</li>
+          <li>การพัฒนาพฤติกรรมที่เหมาะสม</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="panel-d" class="indicator-panel">
+      <div class="indicator-content">
+        <h3>💚 Public Mind — สร้างจิตสาธารณะ</h3>
+        <ul class="indicator-list">
+          <li>กิจกรรมจิตอาสา</li>
+          <li>การช่วยเหลือชุมชน</li>
+          <li>การอนุรักษ์สิ่งแวดล้อม</li>
+          <li>กิจกรรมเพื่อสังคม</li>
+          <li>การสร้างเครือข่ายชุมชน</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="panel-e" class="indicator-panel">
+      <div class="indicator-content">
+        <h3>💡 Innovation / Best Practice — นวัตกรรมและแนวปฏิบัติที่เป็นเลิศ</h3>
+        <ul class="indicator-list">
+          <li>ชื่อผลงาน / โครงการนวัตกรรม</li>
+          <li>แนวคิดและที่มาของนวัตกรรม</li>
+          <li>ปัญหาที่พบและแนวทางแก้ไข</li>
+          <li>วิธีดำเนินงานและขั้นตอน</li>
+          <li>นวัตกรรมที่พัฒนาขึ้น</li>
+          <li>ผลลัพธ์และการขยายผล</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <div class="container">
+    <div class="section-label">Reflection</div>
+    <h2 class="section-title">สิ่งที่<span class="gold">เรียนรู้</span></h2>
+    <div class="divider"></div>
+    <div class="reflection-box">
+      <p class="reflection-quote">
+        "เราได้เรียนรู้ว่าประชาธิปไตยไม่ใช่เพียงการเลือกตั้ง แต่คือการรับฟังความคิดเห็นของทุกคน
+        และร่วมกันสร้างพื้นที่ที่ทุกคนมีคุณค่า"
+      </p>
+      <div class="reflection-aspects">
+        <div class="reflection-aspect">
+          <h4>📚 สิ่งที่ได้เรียนรู้</h4>
+          <p>ทักษะการนำ การทำงานร่วม และการรับฟัง</p>
+        </div>
+        <div class="reflection-aspect">
+          <h4>🔄 ความเปลี่ยนแปลง</h4>
+          <p>นักเรียนมีความรับผิดชอบและจิตสาธารณะเพิ่มขึ้น</p>
+        </div>
+        <div class="reflection-aspect">
+          <h4>💪 ความภาคภูมิใจ</h4>
+          <p>ได้สร้างประโยชน์ให้กับโรงเรียนและชุมชน</p>
+        </div>
+        <div class="reflection-aspect">
+          <h4>🚧 ปัญหา & อุปสรรค</h4>
+          <p>การประสานงานและการบริหารเวลา</p>
+        </div>
+        <div class="reflection-aspect">
+          <h4>🚀 สิ่งที่อยากพัฒนา</h4>
+          <p>การสื่อสารและการมีส่วนร่วมของนักเรียนทั้งหมด</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENT -->
+<section id="achievement">
+  <div class="container">
+    <div class="section-label">Achievement</div>
+    <h2 class="section-title">ผลงาน รางวัล<span class="gold"> & ความภาคภูมิใจ</span></h2>
+    <div class="divider"></div>
+    <div class="achievement-grid">
+      <div class="achievement-card">
+        <div class="ac-icon">🏆</div>
+        <h4>รางวัล</h4>
+      </div>
+      <div class="achievement-card">
+        <div class="ac-icon">📜</div>
+        <h4>เกียรติบัตร</h4>
+      </div>
+      <div class="achievement-card">
+        <div class="ac-icon">⭐</div>
+        <h4>ผลงานเด่น</h4>
+      </div>
+      <div class="achievement-card">
+        <div class="ac-icon">📸</div>
+        <h4>ภาพความสำเร็จ</h4>
+      </div>
+      <div class="achievement-card">
+        <div class="ac-icon">📰</div>
+        <h4>ข่าวประชาสัมพันธ์</h4>
+      </div>
+    </div>
+    <div style="margin-top:2rem; background: var(--sky-light); border-radius:12px; padding:1.5rem; border-left: 4px solid var(--sky);">
+      <p style="color:var(--navy); font-weight:600; margin-bottom:0.5rem;">💡 คำแนะนำ</p>
+      <p style="color:var(--gray); font-size:0.88rem;">เพิ่มภาพจริงจากกิจกรรม รูปรางวัล และเกียรติบัตรที่ได้รับ เพื่อให้ผู้ชมเห็นผลงานที่เป็นรูปธรรม</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">ติดต่อ<span class="gold">ผู้จัดทำ</span></h2>
+    <div class="divider"></div>
+    <p style="color:rgba(255,255,255,0.7); margin-bottom:0.5rem; font-size:0.9rem;">ระบุชื่อสถานศึกษา ที่ตั้ง และสามารถแนะนำคณะทำงานตามรูปแบบที่เหมาะสม</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="cc-icon">🏫</div>
+        <h4>สภานักเรียน</h4>
+        <p>[ชื่อโรงเรียน]<br>[ที่ตั้ง / จังหวัด]</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">👩‍🏫</div>
+        <h4>คณะครูที่ปรึกษา</h4>
+        <p>อ. [ชื่อครูที่ปรึกษา]<br>[กลุ่มสาระ / หน้าที่]</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">👔</div>
+        <h4>ผู้บริหาร</h4>
+        <p>[ชื่อผู้อำนวยการ]<br>ผู้อำนวยการสถานศึกษา</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">📱</div>
+        <h4>ช่องทางติดต่อ</h4>
+        <p>Facebook / Line<br>@studentcouncil</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2568 e-Portfolio สภานักเรียน | จัดทำโดยสภานักเรียน [ชื่อโรงเรียน]</p>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.indicator-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Smooth active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
